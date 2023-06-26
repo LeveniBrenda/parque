@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Centinela | Listado de pedidos reservados</title>
+        <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+        
+        <link rel="shortcut icon" href="https://centinela.tresarroyos.gov.ar/img/icons/centinela-rojo.ico" type="image/x-icon">
+        
+        <link href="https://centinela.tresarroyos.gov.ar/AdminLTE/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        
+        <link href="https://centinela.tresarroyos.gov.ar/AdminLTE/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        
+        
+        <link href="https://centinela.tresarroyos.gov.ar/AdminLTE/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+        
+        <link href="https://centinela.tresarroyos.gov.ar/AdminLTE/css/centinela.min.css" rel="stylesheet" type="text/css" />
+
+        
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            
+
+        
+        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+        
+        
+        
+        
+            
+    
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+<link href="https://cdn.datatables.net/fixedheader/3.1.5/css/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+<link href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    </head>
+
+            <body class="skin-black" onload="actualizaReloj()">
+        
+        
+        <header class="header">
+    <a href="https://centinela.tresarroyos.gov.ar/admin/dashboard" class="logo">
+        
+        Centinela
+    </a>
+    
+    <nav class="navbar navbar-static-top" role="navigation">
+        
+        <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+        <div class="navbar-right">
+            <ul class="nav navbar-nav">
+                
+                <li class="dropdown user user-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="glyphicon glyphicon-user"></i>
+                        <span>Andrea Verne <i class="caret"></i></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        <li class="user-header bg-light-blue">
+                            <img src="https://centinela.tresarroyos.gov.ar/AdminLTE/img/avatar10.png" class="img-circle" alt="User Image" />
+                            <p>
+                                Andrea Verne
+                                <small>Cómputos</small>
+                                <small id="Fecha_Reloj"></small>
+                            </p>
+                        </li>
+                        
+                        <li class="user-footer">
+                            
+                            <div class="pull-left">
+                                <a href="https://centinela.tresarroyos.gov.ar/admin/profiles/185/edit" class="btn btn-default btn-flat">Perfil</a>
+                            </div>
+
+                            <div class="pull-right">
+                                <a class="btn btn-default btn-flat" href="https://centinela.tresarroyos.gov.ar/logout"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">Salir</a>
+
+                                <form id="logout-form" action="https://centinela.tresarroyos.gov.ar/logout" method="POST" style="display: none;">
+                                    <input type="hidden" name="_token" value="Nk6VMYBwRtoSzKDJALX9tLvJh6cwgJodcCwG3Kyj">                                </form>
+
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>        
+        <div class="wrapper row-offcanvas row-offcanvas-left">
+            
+            <aside class="left-side sidebar-offcanvas">
+    
+    <section class="sidebar">
+        
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img src="https://centinela.tresarroyos.gov.ar/AdminLTE/img/avatar10.png" class="img-circle" alt="User Image" />
+            </div>
+            <div class="pull-left info">
+                <p>Hola, Andrea</p>
+
+                <a><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+        </div>
+        
+        <ul class="sidebar-menu">
+            
+            <li class="">
+                <a href="https://centinela.tresarroyos.gov.ar/admin/dashboard">
+                    <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                </a>
+            </li>
+            
+            
+                        
+            <li class="treeview ">
+                <a href="#">
+                    <i class="fa fa-shopping-cart"></i> <span>Productos</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li class=""><a href="https://centinela.tresarroyos.gov.ar/admin/products/create"><i class="fa fa-angle-double-right"></i> Nuevo producto</a></li>
+                    <li class=""><a href="https://centinela.tresarroyos.gov.ar/admin/products"><i class="fa fa-angle-double-right"></i> Listado de productos</a></li>
+                </ul>
+            </li>
+            
+            <li class="treeview ">
+                <a href="#">
+                    <i class="glyphicon glyphicon-user"></i> <span>Operador</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li class=""><a href="https://centinela.tresarroyos.gov.ar/admin/inputproducts/create"><i class="fa fa-angle-double-right"></i> Nuevo ingreso</a></li>
+                    <li class=""><a href="https://centinela.tresarroyos.gov.ar/admin/inputproducts"><i class="fa fa-angle-double-right"></i> Listado de ingresos</a></li>
+                    <li class=""><a href="https://centinela.tresarroyos.gov.ar/admin/outputproducts/create"><i class="fa fa-angle-double-right"></i> Nuevo egreso</a></li>
+                    <li class=""><a href="https://centinela.tresarroyos.gov.ar/admin/outputproducts"><i class="fa fa-angle-double-right"></i> Listado de Egresos</a></li>
+                    <li class=""><a href="https://centinela.tresarroyos.gov.ar/admin/outputproducts/totaloutputs"><i class="fa fa-angle-double-right"></i> Total Egresos</a></li>
+                </ul>
+            </li>
+            
+            <li class="treeview active">
+                <a href="#">
+                    <i class="fa fa-cart-plus"></i> <span>Pedidos</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="active"><a href="https://centinela.tresarroyos.gov.ar/admin/userorders/reservedorders"><i class="fa fa-angle-double-right"></i> Listado pedidos reserv.</a></li>
+                    <li class=""><a href="https://centinela.tresarroyos.gov.ar/admin/userorders/canceledorders"><i class="fa fa-angle-double-right"></i> Listado pedidos cancel.</a></li>
+                </ul>
+            </li>
+            
+            <li class="treeview ">
+                <a href="#">
+                    <i class="fa fa-tasks"></i> <span>Tareas</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li class=""><a href="https://centinela.tresarroyos.gov.ar/admin/workassignments/create"><i class="fa fa-angle-double-right"></i> Nueva tareas</a></li>
+                    <li class=""><a href="https://centinela.tresarroyos.gov.ar/admin/workassignments/sinasignar"><i class="fa fa-angle-double-right"></i>Tareas sin asignar</a></li>
+                    <li class=""><a href="https://centinela.tresarroyos.gov.ar/admin/workassignments"><i class="fa fa-angle-double-right"></i> Listado de tareas</a></li>
+                    <li class=""><a href="https://centinela.tresarroyos.gov.ar/admin/workassignments/terminada"><i class="fa fa-angle-double-right"></i>Tareas terminadas </a></li>
+                    <li class=""><a href="https://centinela.tresarroyos.gov.ar/admin/workassignments/bentrada"><i class="fa fa-angle-double-right"></i>Bandeja de entrada </a></li>
+                   
+                </ul>
+            </li>
+            
+            <li class="treeview ">
+                <a href="#">
+                    <i class="fa fa-phone"></i> <span>Llamados</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+              
+                    <li class=""><a href="https://centinela.tresarroyos.gov.ar/admin/calls"><i class="fa fa-angle-double-right"></i> Listado de llamados</a></li>
+                    <li class=""><a href="https://centinela.tresarroyos.gov.ar/admin/calls/create"><i class="fa fa-angle-double-right"></i> Nuevo llamado</a></li>
+                </ul>
+            </li>
+            
+                            <li class="treeview ">
+                    <a href="#">
+                        
+                        <i class=" fa fa-list-alt"></i> <span>Solicitudes</span>
+                    
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class=""><a href="https://centinela.tresarroyos.gov.ar/admin/solicitudes"><i class="fa fa-angle-double-right"></i>listado de solicitudes</a></li>
+                    </ul>
+                </li>
+                        
+            <li class="treeview ">
+                <a href="#">
+                    <i class="fa fa-desktop"></i> <span>Máquinas</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li class=""><a href="https://centinela.tresarroyos.gov.ar/admin/machines/create"><i class="fa fa-angle-double-right"></i> Nueva máquina</a></li>
+                    <li class=""><a href="https://centinela.tresarroyos.gov.ar/admin/machines"><i class="fa fa-angle-double-right"></i> Listado de máquinas</a></li>
+                </ul>
+            </li>
+            
+            <li class="treeview ">
+                <a href="#">
+                    <i class="fa fa-wifi"></i> <span>Routers</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li class=""><a href="https://centinela.tresarroyos.gov.ar/admin/routers/create"><i class="fa fa-angle-double-right"></i> Nuevo router</a></li>
+                    <li class=""><a href="https://centinela.tresarroyos.gov.ar/admin/routers"><i class="fa fa-angle-double-right"></i> Listado de routers</a></li>
+                </ul>
+            </li>
+            
+            <li class="treeview ">
+                <a href="#">
+                    <i class="fa fa-envelope"></i> <span>Correos</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li class=""><a href="https://centinela.tresarroyos.gov.ar/admin/mails/create"><i class="fa fa-angle-double-right"></i> Nuevo correo</a></li>
+                    <li class=""><a href="https://centinela.tresarroyos.gov.ar/admin/mails"><i class="fa fa-angle-double-right"></i> Listado de correos</a></li>
+                </ul>
+            </li>
+
+            
+            
+            <li class="treeview ">
+                <a href="#">
+                    <i class="fa fa-gear"></i> <span>Parámetros Generales</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li class=""><a href="https://centinela.tresarroyos.gov.ar/admin/parameters/actions"><i class="fa fa-angle-double-right"></i> Acciones</a></li>
+                    <li class=""><a href="https://centinela.tresarroyos.gov.ar/admin/parameters/areas"><i class="fa fa-angle-double-right"></i> Áreas</a></li>
+                    <li class=""><a href="https://centinela.tresarroyos.gov.ar/admin/parameters/statusrepairs"><i class="fa fa-angle-double-right"></i> Est. de reparación</a></li>
+                    <li class=""><a href="https://centinela.tresarroyos.gov.ar/admin/parameters/statusoutputs"><i class="fa fa-angle-double-right"></i> Est. de salida</a></li>
+                    <li class=""><a href="https://centinela.tresarroyos.gov.ar/admin/parameters/machinetypes"><i class="fa fa-angle-double-right"></i> Tipos de máquinas</a></li>
+                    <li class=""><a href="https://centinela.tresarroyos.gov.ar/admin/parameters/users"><i class="fa fa-angle-double-right"></i> Usuarios</a></li>
+                </ul>
+            </li>
+                    </ul>
+    </section>
+    
+</aside>
+            
+            <aside class="right-side">
+
+                
+<section class="content-header">
+    <h1>
+        <i class="fa fa-cart-plus"></i> Pedidos Reservados
+        <small>Listado</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="https://centinela.tresarroyos.gov.ar/admin/dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li class="active">Pedidos</li>
+        <li class="active">Listado</li>
+    </ol>
+</section>
+
+                
+                <section class="content">
+
+                    
+	  	                                
+                                    
+                    
+<div class="col-md-12">
+    
+    <div class="box box-info">
+        
+        <div class="box-body">
+            
+            <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Solicitante</th>
+                        <th>Área</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                                            <tr>
+                            
+                            <td><a href="https://centinela.tresarroyos.gov.ar/admin/outputproducts/5292" data-toggle="tooltip" title="Ver">2023-06-26</a></td>
+
+                            <td>10:19</td>
+
+                            <td>Resma Papel A4 (Punax)</td>
+
+                            <td>3</td>
+
+                            <td>Lucchetti, Susana</td>
+
+                            <td>Juzgado de Faltas</td>
+
+                            <td class="text-warning">Reservado</td>
+
+                            <td>
+                                
+                                <a href="https://centinela.tresarroyos.gov.ar/admin/confirmorder/5292" class="btn btn-success btn-xs" title="Confirmar" data-toggle="tooltip"><i class="fa fa-check"></i></a>
+
+                                <a href="https://centinela.tresarroyos.gov.ar/admin/cancelorder/5292" class="btn btn-danger btn-xs" title="Cancelar" data-toggle="tooltip"><i class="fa fa-times"></i></a>
+                            </td>
+
+                        </tr>
+                                            <tr>
+                            
+                            <td><a href="https://centinela.tresarroyos.gov.ar/admin/outputproducts/5291" data-toggle="tooltip" title="Ver">2023-06-26</a></td>
+
+                            <td>09:02</td>
+
+                            <td>Resma Papel A4 (Punax)</td>
+
+                            <td>3</td>
+
+                            <td>Gral, Deportes</td>
+
+                            <td>Deportes</td>
+
+                            <td class="text-warning">Reservado</td>
+
+                            <td>
+                                
+                                <a href="https://centinela.tresarroyos.gov.ar/admin/confirmorder/5291" class="btn btn-success btn-xs" title="Confirmar" data-toggle="tooltip"><i class="fa fa-check"></i></a>
+
+                                <a href="https://centinela.tresarroyos.gov.ar/admin/cancelorder/5291" class="btn btn-danger btn-xs" title="Cancelar" data-toggle="tooltip"><i class="fa fa-times"></i></a>
+                            </td>
+
+                        </tr>
+                                            <tr>
+                            
+                            <td><a href="https://centinela.tresarroyos.gov.ar/admin/outputproducts/5287" data-toggle="tooltip" title="Ver">2023-06-26</a></td>
+
+                            <td>07:19</td>
+
+                            <td>Resma Papel A4 (Punax)</td>
+
+                            <td>3</td>
+
+                            <td>Chamús, Luciano</td>
+
+                            <td>Secretaría de Salud y Prevención</td>
+
+                            <td class="text-warning">Reservado</td>
+
+                            <td>
+                                
+                                <a href="https://centinela.tresarroyos.gov.ar/admin/confirmorder/5287" class="btn btn-success btn-xs" title="Confirmar" data-toggle="tooltip"><i class="fa fa-check"></i></a>
+
+                                <a href="https://centinela.tresarroyos.gov.ar/admin/cancelorder/5287" class="btn btn-danger btn-xs" title="Cancelar" data-toggle="tooltip"><i class="fa fa-times"></i></a>
+                            </td>
+
+                        </tr>
+                                            <tr>
+                            
+                            <td><a href="https://centinela.tresarroyos.gov.ar/admin/outputproducts/5246" data-toggle="tooltip" title="Ver">2023-06-01</a></td>
+
+                            <td>13:58</td>
+
+                            <td>Tóner 49A/53A (GTC Ribbon)</td>
+
+                            <td>1</td>
+
+                            <td>LOCAL, SERVICIO</td>
+
+                            <td>Desarrollo Social</td>
+
+                            <td class="text-warning">Reservado</td>
+
+                            <td>
+                                
+                                <a href="https://centinela.tresarroyos.gov.ar/admin/confirmorder/5246" class="btn btn-success btn-xs" title="Confirmar" data-toggle="tooltip"><i class="fa fa-check"></i></a>
+
+                                <a href="https://centinela.tresarroyos.gov.ar/admin/cancelorder/5246" class="btn btn-danger btn-xs" title="Cancelar" data-toggle="tooltip"><i class="fa fa-times"></i></a>
+                            </td>
+
+                        </tr>
+                                            <tr>
+                            
+                            <td><a href="https://centinela.tresarroyos.gov.ar/admin/outputproducts/5242" data-toggle="tooltip" title="Ver">2023-06-01</a></td>
+
+                            <td>11:24</td>
+
+                            <td>Teclado USB (Genius)</td>
+
+                            <td>1</td>
+
+                            <td>Scarabotti, Leonela</td>
+
+                            <td>Juventud</td>
+
+                            <td class="text-warning">Reservado</td>
+
+                            <td>
+                                
+                                <a href="https://centinela.tresarroyos.gov.ar/admin/confirmorder/5242" class="btn btn-success btn-xs" title="Confirmar" data-toggle="tooltip"><i class="fa fa-check"></i></a>
+
+                                <a href="https://centinela.tresarroyos.gov.ar/admin/cancelorder/5242" class="btn btn-danger btn-xs" title="Cancelar" data-toggle="tooltip"><i class="fa fa-times"></i></a>
+                            </td>
+
+                        </tr>
+                                            <tr>
+                            
+                            <td><a href="https://centinela.tresarroyos.gov.ar/admin/outputproducts/5241" data-toggle="tooltip" title="Ver">2023-06-01</a></td>
+
+                            <td>11:14</td>
+
+                            <td>Resma Papel A4 (Punax)</td>
+
+                            <td>2</td>
+
+                            <td>Scarabotti, Leonela</td>
+
+                            <td>Juventud</td>
+
+                            <td class="text-warning">Reservado</td>
+
+                            <td>
+                                
+                                <a href="https://centinela.tresarroyos.gov.ar/admin/confirmorder/5241" class="btn btn-success btn-xs" title="Confirmar" data-toggle="tooltip"><i class="fa fa-check"></i></a>
+
+                                <a href="https://centinela.tresarroyos.gov.ar/admin/cancelorder/5241" class="btn btn-danger btn-xs" title="Cancelar" data-toggle="tooltip"><i class="fa fa-times"></i></a>
+                            </td>
+
+                        </tr>
+                                            <tr>
+                            
+                            <td><a href="https://centinela.tresarroyos.gov.ar/admin/outputproducts/5237" data-toggle="tooltip" title="Ver">2023-05-31</a></td>
+
+                            <td>10:06</td>
+
+                            <td>Tóner 35A/36A/85A (DGM)</td>
+
+                            <td>3</td>
+
+                            <td>Molina, Lautaro</td>
+
+                            <td>Catastro</td>
+
+                            <td class="text-warning">Reservado</td>
+
+                            <td>
+                                
+                                <a href="https://centinela.tresarroyos.gov.ar/admin/confirmorder/5237" class="btn btn-success btn-xs" title="Confirmar" data-toggle="tooltip"><i class="fa fa-check"></i></a>
+
+                                <a href="https://centinela.tresarroyos.gov.ar/admin/cancelorder/5237" class="btn btn-danger btn-xs" title="Cancelar" data-toggle="tooltip"><i class="fa fa-times"></i></a>
+                            </td>
+
+                        </tr>
+                                    </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Solicitante</th>
+                        <th>Área</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </tfoot>
+            </table>
+
+        </div>
+        <div class="box-footer">
+            
+        </div>
+    </div>
+</div>
+
+
+                </section>
+            </aside>
+        </div>
+
+
+        
+        <script src="https://centinela.tresarroyos.gov.ar/js/jquery.min.js"></script>
+        
+        <script src="https://centinela.tresarroyos.gov.ar/AdminLTE/js/bootstrap.min.js" type="text/javascript"></script>
+        
+        <script src="https://centinela.tresarroyos.gov.ar/AdminLTE/js/AdminLTE/app.min.js" type="text/javascript"></script>
+
+        
+        <script>
+            $('#flash-overlay-modal').modal();
+        </script>
+
+        
+        <script src="https://centinela.tresarroyos.gov.ar/AdminLTE/plugins/fecha-hora/fecha-hora.min.js" type="text/javascript"></script>
+
+        
+    
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" type="text/javascript"></script>
+
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
+
+<script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js" type="text/javascript"></script>
+
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js" type="text/javascript"></script>
+
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js" type="text/javascript"></script>
+
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap.min.js" type="text/javascript"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js" type="text/javascript"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js" type="text/javascript"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js" type="text/javascript"></script>
+
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js" type="text/javascript"></script>
+
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js" type="text/javascript"></script>
+
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js" type="text/javascript"></script>
+
+<script src="https://centinela.tresarroyos.gov.ar/AdminLTE/plugins/datatables/datatables-desc.min.js" type="text/javascript"></script>
+    
+    <script>
+    $(document).ready(function(){$('[data-toggle="tooltip"]').tooltip()});
+</script>
+
+    </body>
+</html>
